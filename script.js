@@ -64,5 +64,15 @@ const column = (n) => {
   }
 };
 
-console.log(body);
+// Requisito 8
+colors[0].classList.add('selected');
+
+colorPalette.addEventListener('click', (event) => {
+  for (let index = 0; index < colors.length; index += 1) {
+    colors[index].classList.remove('selected');
+  }
+  event.target.classList.add('selected');
+});
+
+console.log(colors[0]);
 column(5);
