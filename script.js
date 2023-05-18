@@ -37,8 +37,6 @@ const randomColor = () => {
 
 btn.addEventListener('click', () => {
   randomColor();
-
-  // localStorage.setItem('colorPalette', randomColor());
 });
 
 // Requisito 5
@@ -83,7 +81,29 @@ colorPalette.addEventListener('click', (event) => {
   event.target.classList.add('selected');
 });
 
-console.log(colors[0]);
+// Requisito 10
+for (let index1 = 0; index1 < colors.length; index1 += 1) {
+  const randomRed = Math.floor(Math.random() * 256);
+  const randomGreen = Math.floor(Math.random() * 256);
+  const randomBlue = Math.floor(Math.random() * 256);
+  const randomRGB = `rgb(${randomRed}, ${randomGreen}, ${randomBlue})`;
+  if (colors[index1] === colors[0]) {
+    colors[index1].style.backgroundColor = 'black';
+  } else {
+    colors[index1].style.backgroundColor = randomRGB;
+  }
+}
+
+const pixelsBoard = document.querySelector('#pixel-board');
+
+pixelsBoard.addEventListener('click', (event) => {
+  for (let index = 0; index < colors.length; index += 1) {
+    if (colors[index].classList.contains('selected')) {
+      event.target.style.backgroundColor = colors[index].style.backgroundColor;
+    }
+    console.log(colors[0]);
+  }
+});
 
 column(5);
 window.onload = function () {
