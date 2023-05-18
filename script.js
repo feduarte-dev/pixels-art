@@ -128,6 +128,10 @@ clearBtn.addEventListener('click', () => {
 
 // Requisito 12
 const devolveQuadro = () => {
+  if (localStorage.getItem('pixelBoard') === null) {
+    return pixelsBoard;
+  }
+
   pixelsBoard.innerHTML = localStorage.getItem('pixelBoard');
 };
 
@@ -173,5 +177,5 @@ vqvBtn.addEventListener('click', () => {
 column(5);
 window.onload = function () {
   devolveCor();
-  // devolveQuadro();
+  devolveQuadro();
 };
