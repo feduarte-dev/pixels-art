@@ -12,12 +12,15 @@ for (let index = 0; index < 4; index += 1) {
   color.classList.add('color');
   colorPalette.appendChild(color);
 }
+const buttons = document.createElement('div');
+buttons.setAttribute('id', 'buttons');
+body.appendChild(buttons);
 
 // Requisito 4.1
 const button = document.createElement('button');
 button.setAttribute('id', 'button-random-color');
 button.innerText = 'Cores aleatórias';
-body.appendChild(button);
+buttons.appendChild(button);
 
 // Requisito 4.3
 const btn = document.querySelector('#button-random-color');
@@ -60,6 +63,7 @@ const row = (n) => {
   for (let index = 0; index < n; index += 1) {
     const pixels = document.createElement('div');
     pixels.classList.add('pixel');
+    pixels.style.backgroundColor = 'white';
     board.appendChild(pixels);
   }
 };
@@ -101,10 +105,22 @@ pixelsBoard.addEventListener('click', (event) => {
     if (colors[index].classList.contains('selected')) {
       event.target.style.backgroundColor = colors[index].style.backgroundColor;
     }
-    console.log(colors[0]);
   }
 });
 
+// Requisito 11
+const clearBtn = document.createElement('button');
+clearBtn.setAttribute('id', 'clear-board');
+clearBtn.innerText = 'Limpar';
+buttons.appendChild(clearBtn);
+const allPixels = document.getElementsByClassName('pixel');
+
+clearBtn.addEventListener('click', () => {
+  for (let index = 0; index < allPixels.length; index += 1) {
+    allPixels[index].style.backgroundColor = 'white';
+  }
+});
+console.log(allPixels);
 column(5);
 window.onload = function () {
   devolveCor();

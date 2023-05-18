@@ -1,5 +1,5 @@
 /* Requisito 2.2 e 3 */
-.color:nth-of-type(1) {
+/*.color:nth-of-type(1) {
   background-color: black;
 }
 .color:nth-of-type(2) {
@@ -10,7 +10,7 @@
 }
 .color:nth-of-type(4) {
   background-color: blue;
-}
+}*/
 
 /* Requisito 2.3-4 */
 .color {
@@ -26,7 +26,7 @@
   width: 40px;
   height: 40px;
   border: 1px solid black;
-  background-color: white;
+ /* background-color: white;*/
 }
 
 #color-palette {
