@@ -145,21 +145,19 @@ vqvBtn.setAttribute('id', 'generate-board');
 vqvBtn.innerText = 'VQV';
 chooseBoardSize.appendChild(vqvBtn);
 const inputValue = document.querySelector('input');
+
 const deletePixels = () => {
   const pixels = document.querySelectorAll('.pixel');
   const breaks = document.querySelectorAll('br');
   for (let index = 0; index < breaks.length; index += 1) {
-    
     breaks[index].remove();
   }
   for (let index = 0; index < pixels.length; index += 1) {
     pixels[index].remove();
-    breaks[index].remove();
   }
 };
 
 vqvBtn.addEventListener('click', () => {
-
   if (inputValue.value.length === 0) {
     alert('Board Inválido!');
   }
@@ -170,9 +168,7 @@ vqvBtn.addEventListener('click', () => {
   }
   deletePixels();
   column(inputValue.value);
-  
 });
-
 
 column(5);
 window.onload = function () {
