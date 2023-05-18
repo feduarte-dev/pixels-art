@@ -131,7 +131,6 @@ const devolveQuadro = () => {
   if (localStorage.getItem('pixelBoard') === null) {
     return pixelsBoard;
   }
-
   pixelsBoard.innerHTML = localStorage.getItem('pixelBoard');
 };
 
@@ -172,10 +171,23 @@ vqvBtn.addEventListener('click', () => {
   }
   deletePixels();
   column(inputValue.value);
+
+  localStorage.setItem('boardSize', JSON.stringify(pixelsBoard.innerHTML));
 });
+
+// Requisito 15
+const devolveSize = () => {
+  if (localStorage.getItem('boardSize') === null) {
+    return pixelsBoard;
+  }
+
+  pixelsBoard.innerHTML = JSON.parse(localStorage.getItem('boardSize'));
+  devolveQuadro();
+};
 
 column(5);
 window.onload = function () {
   devolveCor();
   devolveQuadro();
+  devolveSize();
 };
