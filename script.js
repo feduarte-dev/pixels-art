@@ -27,15 +27,15 @@ const btn = document.querySelector('#button-random-color');
 const colors = document.querySelectorAll('.color');
 
 const randomColor = () => {
-  let cor = [];
+  const colorsArray = [];
   for (let index = 1; index < colors.length; index += 1) {
     const randomRed = Math.floor(Math.random() * 256);
     const randomGreen = Math.floor(Math.random() * 256);
     const randomBlue = Math.floor(Math.random() * 256);
     const randomRGB = `rgb(${randomRed}, ${randomGreen}, ${randomBlue})`;
-    cor.push((colors[index].style.backgroundColor = randomRGB));
+    colorsArray.push((colors[index].style.backgroundColor = randomRGB));
   }
-  localStorage.setItem('colorPalette', JSON.stringify(cor));
+  localStorage.setItem('colorPalette', JSON.stringify(colorsArray));
 };
 
 btn.addEventListener('click', () => {
@@ -44,13 +44,15 @@ btn.addEventListener('click', () => {
 
 // Requisito 5
 const devolveCor = () => {
-  const teste1 = JSON.parse(localStorage.getItem('colorPalette'));
-  if (teste1 === null) {
+  const colorPaletteLocalStorage = JSON.parse(
+    localStorage.getItem('colorPalette')
+  );
+  if (colorPaletteLocalStorage === null) {
     return colorPalette;
   }
 
   for (let index = 1; index < colors.length; index += 1) {
-    colors[index].style.backgroundColor = teste1[index - 1];
+    colors[index].style.backgroundColor = colorPaletteLocalStorage[index - 1];
   }
 };
 
@@ -101,11 +103,14 @@ for (let index1 = 0; index1 < colors.length; index1 += 1) {
 const pixelsBoard = document.querySelector('#pixel-board');
 
 pixelsBoard.addEventListener('click', (event) => {
+  // let corPixel = [];
   for (let index = 0; index < colors.length; index += 1) {
     if (colors[index].classList.contains('selected')) {
       event.target.style.backgroundColor = colors[index].style.backgroundColor;
     }
+    // corPixel.push(colors[index].style.backgroundColor);
   }
+  localStorage.setItem('pixelBoard', pixelsBoard.innerHTML);
 });
 
 // Requisito 11
@@ -120,8 +125,57 @@ clearBtn.addEventListener('click', () => {
     allPixels[index].style.backgroundColor = 'white';
   }
 });
-console.log(allPixels);
+
+// Requisito 12
+const devolveQuadro = () => {
+  pixelsBoard.innerHTML = localStorage.getItem('pixelBoard');
+};
+
+// Requisito 13
+const chooseBoardSize = document.createElement('div');
+chooseBoardSize.setAttribute('id', 'chooseBoardSize');
+buttons.appendChild(chooseBoardSize);
+const input = document.createElement('input');
+input.setAttribute('id', 'board-size');
+input.setAttribute('type', 'number');
+input.setAttribute('min', '1');
+chooseBoardSize.appendChild(input);
+const vqvBtn = document.createElement('button');
+vqvBtn.setAttribute('id', 'generate-board');
+vqvBtn.innerText = 'VQV';
+chooseBoardSize.appendChild(vqvBtn);
+const inputValue = document.querySelector('input');
+const deletePixels = () => {
+  const pixels = document.querySelectorAll('.pixel');
+  const breaks = document.querySelectorAll('br');
+  for (let index = 0; index < breaks.length; index += 1) {
+    
+    breaks[index].remove();
+  }
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].remove();
+    breaks[index].remove();
+  }
+};
+
+vqvBtn.addEventListener('click', () => {
+
+  if (inputValue.value.length === 0) {
+    alert('Board Inválido!');
+  }
+  if (inputValue.value < 5) {
+    inputValue.value = 5;
+  } else if (inputValue.value > 50) {
+    inputValue.value = 50;
+  }
+  deletePixels();
+  column(inputValue.value);
+  
+});
+
+
 column(5);
 window.onload = function () {
   devolveCor();
+  // devolveQuadro();
 };
