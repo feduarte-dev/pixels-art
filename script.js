@@ -13,8 +13,6 @@ for (let index = 0; index < 4; index += 1) {
   colorPalette.appendChild(color);
 }
 
-
-
 // Requisito 4.1
 const button = document.createElement('button');
 button.setAttribute('id', 'button-random-color');
@@ -32,31 +30,29 @@ const randomColor = () => {
     const randomGreen = Math.floor(Math.random() * 256);
     const randomBlue = Math.floor(Math.random() * 256);
     const randomRGB = `rgb(${randomRed}, ${randomGreen}, ${randomBlue})`;
-    cor.push(colors[index].style.backgroundColor = randomRGB);
+    cor.push((colors[index].style.backgroundColor = randomRGB));
   }
   localStorage.setItem('colorPalette', JSON.stringify(cor));
-
-  return colorPalette.innerHTML;
 };
 
 btn.addEventListener('click', () => {
   randomColor();
-  
+
   // localStorage.setItem('colorPalette', randomColor());
 });
 
+// Requisito 5
 const devolveCor = () => {
-for (let index = 0; index < colors.length; index += 1) {
-  colors[index].style.backgroundColor = JSON.parse(localStorage.getItem('colorPalette'));
-  console.log(colors[index])
-}
+  const teste1 = JSON.parse(localStorage.getItem('colorPalette'));
+  if (teste1 === null) {
+    return colorPalette;
+  }
+
+  for (let index = 1; index < colors.length; index += 1) {
+    colors[index].style.backgroundColor = teste1[index - 1];
+  }
 };
 
-window.onload = function(){
-devolveCor()
-};
-
-devolveCor();
 // Requisito 6.1-2
 const board = document.createElement('div');
 board.setAttribute('id', 'pixel-board');
@@ -87,7 +83,9 @@ colorPalette.addEventListener('click', (event) => {
   event.target.classList.add('selected');
 });
 
-
-
 console.log(colors[0]);
+
 column(5);
+window.onload = function () {
+  devolveCor();
+};
