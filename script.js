@@ -6,13 +6,14 @@ colorSelect.setAttribute('id', 'color-palette');
 body.appendChild(colorSelect);
 
 const colorPalette = document.querySelector('#color-palette');
+
 for (let index = 0; index < 4; index += 1) {
   const color = document.createElement('div');
   color.classList.add('color');
   colorPalette.appendChild(color);
 }
 
-// Requisito 5
+
 
 // Requisito 4.1
 const button = document.createElement('button');
@@ -25,25 +26,37 @@ const btn = document.querySelector('#button-random-color');
 const colors = document.querySelectorAll('.color');
 
 const randomColor = () => {
+  let cor = [];
   for (let index = 1; index < colors.length; index += 1) {
     const randomRed = Math.floor(Math.random() * 256);
     const randomGreen = Math.floor(Math.random() * 256);
     const randomBlue = Math.floor(Math.random() * 256);
     const randomRGB = `rgb(${randomRed}, ${randomGreen}, ${randomBlue})`;
-    colors[index].style.backgroundColor = randomRGB;
+    cor.push(colors[index].style.backgroundColor = randomRGB);
   }
+  localStorage.setItem('colorPalette', JSON.stringify(cor));
 
   return colorPalette.innerHTML;
 };
 
 btn.addEventListener('click', () => {
   randomColor();
-  localStorage.setItem('colorPalette', randomColor());
+  
+  // localStorage.setItem('colorPalette', randomColor());
 });
 
-// colorPalette.innerHTML = localStorage.getItem('colorPalette');
-// Onde coloco isso
+const devolveCor = () => {
+for (let index = 0; index < colors.length; index += 1) {
+  colors[index].style.backgroundColor = JSON.parse(localStorage.getItem('colorPalette'));
+  console.log(colors[index])
+}
+};
 
+window.onload = function(){
+devolveCor()
+};
+
+devolveCor();
 // Requisito 6.1-2
 const board = document.createElement('div');
 board.setAttribute('id', 'pixel-board');
@@ -73,6 +86,8 @@ colorPalette.addEventListener('click', (event) => {
   }
   event.target.classList.add('selected');
 });
+
+
 
 console.log(colors[0]);
 column(5);
