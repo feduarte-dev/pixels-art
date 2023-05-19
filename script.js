@@ -65,6 +65,7 @@ const row = (n) => {
   for (let index = 0; index < n; index += 1) {
     const pixels = document.createElement('div');
     pixels.classList.add('pixel');
+    pixels.style.margin = '-2px 0';
     pixels.style.backgroundColor = 'white';
     board.appendChild(pixels);
   }
