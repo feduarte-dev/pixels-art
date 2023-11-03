@@ -26,7 +26,7 @@ This project was a real challenge for me. I needed to dynamically create a grid 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/feduarte-dev/tech-gallery
+   git clone https://github.com/feduarte-dev/pixels-art
    ```
 
 2. Navigate to the project directory:
